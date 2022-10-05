@@ -6,8 +6,6 @@ const TaskInput = () => {
   let list = useSelector((store) => store);
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
-  const [group, setGroup] = useState("");
-  const [groups, setGroups] = useState(["group-1", "group-2", "group-3"]);
 
   const addNewTitle = (e) => {
     e.preventDefault();
@@ -34,15 +32,6 @@ const TaskInput = () => {
           placeholder={"Enter the title"}
           onChange={(event) => addNewTitle(event)}
         />
-        <select name="groups" id="#" className="TaskInput__Select">
-          {groups.map((item) => {
-            return (
-              <option key={item.toString()} value="item">
-                {item}
-              </option>
-            );
-          })}
-        </select>
         <button onClick={(event) => addNewTask(event)}>go!</button>
       </form>
       <List center listStyleType="none">
