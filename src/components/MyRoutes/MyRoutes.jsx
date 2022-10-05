@@ -8,7 +8,7 @@ const MyRoutes = () => {
     <div className="MyRoutes">
       <div className="container">
         <Routes>
-          <Route path="/todo-page" element={<TodoPage />} />
+          <Route path="/" element={<TodoPage />} />
           <Route path="/assignment" element={<Assignment />} />
         </Routes>
       </div>

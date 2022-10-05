@@ -9,7 +9,7 @@ const Header = () => {
         <nav className="header__nav">
           <ul>
             <li>
-              <Link className="header__nav-link" to="/todo-page">
+              <Link className="header__nav-link" to="/">
                 Todo Page
               </Link>
             </li>
