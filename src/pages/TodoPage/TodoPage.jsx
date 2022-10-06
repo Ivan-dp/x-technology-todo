@@ -1,11 +1,12 @@
 import React from "react";
-import { TaskInput } from "../../components";
+import { TaskInput, Board } from "../../components";
 
 const TodoPage = () => {
   return (
     <div className="TodoPage">
       Todo Page
       <TaskInput />
+      <Board />
     </div>
   );
 };

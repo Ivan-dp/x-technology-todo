@@ -22,7 +22,7 @@ function Main() {
             title: action.payload,
             description: "",
             group: "",
-            complete: false,
+            completed: false,
             tags: [],
           },
         ];
@@ -42,6 +42,11 @@ function Main() {
         return state.filter((task) => task.tags.push(action.payload));
       case "ADD_GROUP":
         return state.filter((task) => (task.group = action.payload));
+      // return state.map((task) => {
+      //   if (task.id === action.payload.id)
+      //     return { ...task, group: action.payload.group };
+      //   return task;
+      // });
       default:
         return state;
     }

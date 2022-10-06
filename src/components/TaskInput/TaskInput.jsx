@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { List } from "@mantine/core";
+import { addNewTitle, addNewGroup } from "../../functions";
 
 const TaskInput = () => {
   let list = useSelector((store) => store);
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
-
-  const addNewTitle = (e) => {
-    e.preventDefault();
-    setTitle(e.target.value);
-  };
+  const [group, setGroup] = useState("");
 
   const addNewTask = (e) => {
     e.preventDefault();
@@ -21,6 +18,13 @@ const TaskInput = () => {
       });
     }
     setTitle("");
+    if (group) {
+      dispatch({
+        type: "ADD_GROUP",
+        payload: group,
+      });
+    }
+    setGroup("");
   };
 
   return (
@@ -30,13 +34,19 @@ const TaskInput = () => {
           type="text"
           value={title}
           placeholder={"Enter the title"}
-          onChange={(event) => addNewTitle(event)}
+          onChange={(event) => addNewTitle(event, setTitle)}
+        />
+        <input
+          type="text"
+          value={group}
+          placeholder={"Enter the group"}
+          onChange={(event) => addNewGroup(event, setGroup)}
         />
         <button onClick={(event) => addNewTask(event)}>go!</button>
       </form>
       <List center listStyleType="none">
         {list.map((item) => (
-          <li key={item.id}>{item.title}</li>
+          <List.Item key={item.id}>{item.title}</List.Item>
         ))}
       </List>
     </div>
