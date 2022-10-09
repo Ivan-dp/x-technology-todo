@@ -6,9 +6,9 @@ import { TodoPage, Assignment } from "../../pages";
 const MyRoutes = () => {
   return (
     <div className="MyRoutes">
-      <div className="container">
+      <div className="Container">
         <Routes>
-          <Route path="/todo-page" element={<TodoPage />} />
+          <Route path="/" element={<TodoPage />} />
           <Route path="/assignment" element={<Assignment />} />
         </Routes>
       </div>

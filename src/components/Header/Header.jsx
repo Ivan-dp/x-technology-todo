@@ -4,17 +4,17 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header className="header">
-      <div className="container">
-        <nav className="header__nav">
+    <header className="Header">
+      <div className="Container">
+        <nav className="Header__Nav">
           <ul>
             <li>
-              <Link className="header__nav-link" to="/todo-page">
+              <Link className="Header__Nav-Link" to="/">
                 Todo Page
               </Link>
             </li>
             <li>
-              <Link className="header__nav-link" to="/assignment">
+              <Link className="Header__Nav-Link" to="/assignment">
                 Assignment
               </Link>
             </li>
