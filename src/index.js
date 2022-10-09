@@ -26,6 +26,19 @@ function Main() {
             cards: [],
           },
         ];
+      case "ADD_CARD":
+        return [
+          ...state,
+          {
+            id: "card-" + randomId(),
+            type: "card",
+            title: action.payload.title,
+            description: "description",
+            tags: [],
+            color: "",
+            tasks: [],
+          },
+        ];
       case "ADD_TASK":
         return [
           ...state,
