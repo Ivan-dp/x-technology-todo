@@ -4,16 +4,20 @@ import { IconFolderPlus } from "@tabler/icons";
 import { addNewTitle, randomId } from "../../functions";
 
 const Board = () => {
-  const [boardList, setBoardList] = useState([{}]);
+  const [boardList, setBoardList] = useState([]);
   const [title, setTitle] = useState("");
 
   console.log(boardList);
-  console.log(boardList.title);
+  if (boardList.length > 0) {
+    for (let i = 0; i < boardList.length; i++) {
+      console.log(boardList[i].title);
+    }
+  }
 
   return (
     <div className="Board Container">
       <Input
-        onClick={(event) => {
+        onChange={(event) => {
           addNewTitle(event, setTitle);
         }}
       ></Input>
