@@ -1,17 +1,16 @@
-import React, { useState } from "react";
 import { Input } from "@mantine/core";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { addNewTitle } from "../../functions";
-import { useDispatch, useSelector } from "react-redux";
+import { Card } from "../";
 import "./Group.scss";
 
 const Group = (props) => {
   const id = props.id;
-  console.log(id);
   const [title, setTitle] = useState("");
+  const cards = props.board.cards;
 
-  const boards = useSelector((store) => store);
   const dispatch = useDispatch();
-  console.log(boards);
   const addNewCard = (e) => {
     e.preventDefault();
     if (title) {
@@ -23,17 +22,6 @@ const Group = (props) => {
     }
     setTitle("");
   };
-
-  // for (var obj in boards) {
-  //   if (obj.id === id) {
-  //     // if (obj.cards.length > 0) {
-  //     var cards = [...obj.cards];
-  //     console.log(cards);
-  //     return cards;
-  //     // }
-  //   }
-  // }
-  const cards = props.board.cards;
   return (
     <div className="Group">
       <h3>{props.title}</h3>
@@ -59,13 +47,14 @@ const Group = (props) => {
       <div
         style={{
           width: "100%",
-          height: "100px",
+          height: "auto",
           border: "1px solid red",
           borderRadius: "10px",
+          padding: "10px",
         }}
       >
         {cards.map((card) => (
-          <p key={card.id}>{card.title}</p>
+          <Card key={card.id} card={card} />
         ))}
       </div>
     </div>
