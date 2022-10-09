@@ -19,7 +19,7 @@ function Main() {
           {
             id: "group-" + randomId(),
             type: "group",
-            title: action.payload,
+            title: action.title,
             description: "description",
             tags: [],
             color: "",
@@ -27,18 +27,45 @@ function Main() {
           },
         ];
       case "ADD_CARD":
-        return [
-          ...state,
-          {
-            id: "card-" + randomId(),
-            type: "card",
-            title: action.payload.title,
-            description: "description",
-            tags: [],
-            color: "",
-            tasks: [],
-          },
-        ];
+        return state.map((group) => {
+          if (group.id === action.id)
+            return {
+              ...group,
+              cards: [
+                ...group.cards,
+                {
+                  id: "card-" + randomId(),
+                  type: "card",
+                  title: action.title,
+                  description: "description",
+                  tags: [],
+                  color: "",
+                  tasks: [],
+                },
+              ],
+            };
+          console.log(group);
+          return group;
+        });
+      // case "ADD_CARD":
+      //   return state.map((group) => {
+      //     if (group.id === action.payload.id)
+      //       return {
+      //         ...group,
+      //         cards: [
+      //           {
+      //             id: "card-" + randomId(),
+      //             type: "card",
+      //             title: action.payload.title,
+      //             description: "description",
+      //             tags: [],
+      //             color: "",
+      //             tasks: [],
+      //           },
+      //         ],
+      //       };
+      //     return group;
+      //   });
       case "ADD_TASK":
         return [
           ...state,

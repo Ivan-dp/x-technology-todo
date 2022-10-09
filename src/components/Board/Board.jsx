@@ -22,7 +22,7 @@ const Board = () => {
     if (title) {
       dispatch({
         type: "ADD_GROUP",
-        payload: title,
+        title: title,
       });
     }
     setTitle("");
@@ -32,7 +32,12 @@ const Board = () => {
     <div className="Board Container">
       <Grid>
         {boards.map((board) => (
-          <Group key={board.id} title={board.title} />
+          <Group
+            id={board.id}
+            key={board.id}
+            title={board.title}
+            board={board}
+          />
         ))}
       </Grid>
       <form action="">

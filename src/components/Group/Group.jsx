@@ -5,23 +5,35 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Group.scss";
 
 const Group = (props) => {
+  const id = props.id;
+  console.log(id);
   const [title, setTitle] = useState("");
 
-  let boards = useSelector((store) => store);
+  const boards = useSelector((store) => store);
   const dispatch = useDispatch();
-
+  console.log(boards);
   const addNewCard = (e) => {
     e.preventDefault();
     if (title) {
       dispatch({
         type: "ADD_CARD",
-        payload: {
-          title: title,
-        },
+        title: title,
+        id: id,
       });
     }
     setTitle("");
   };
+
+  // for (var obj in boards) {
+  //   if (obj.id === id) {
+  //     // if (obj.cards.length > 0) {
+  //     var cards = [...obj.cards];
+  //     console.log(cards);
+  //     return cards;
+  //     // }
+  //   }
+  // }
+  const cards = props.board.cards;
   return (
     <div className="Group">
       <h3>{props.title}</h3>
@@ -29,7 +41,7 @@ const Group = (props) => {
         <Input
           type="text"
           value={title}
-          placeholder="Enter group name"
+          placeholder="Enter card name"
           onChange={(event) => {
             addNewTitle(event, setTitle);
           }}
@@ -40,9 +52,22 @@ const Group = (props) => {
             addNewCard(event);
           }}
         >
-          Новая группа
+          Новая карточка
         </Input>
       </form>
+
+      <div
+        style={{
+          width: "100%",
+          height: "100px",
+          border: "1px solid red",
+          borderRadius: "10px",
+        }}
+      >
+        {cards.map((card) => (
+          <p key={card.id}>{card.title}</p>
+        ))}
+      </div>
     </div>
   );
 };
