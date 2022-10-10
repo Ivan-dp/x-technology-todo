@@ -34,7 +34,7 @@ function Main() {
               cards: [
                 ...group.cards,
                 {
-                  id: "card-" + randomId(),
+                  id: action.cardId,
                   type: "card",
                   title: action.title,
                   description: "card description",
@@ -47,37 +47,66 @@ function Main() {
           console.log(group);
           return group;
         });
-      // case "ADD_CARD":
+      case "ADD_TASK":
+        return state.map((group) => {
+          if (group.id === action.id)
+            return group.cards.map((card) => {
+              if (card.id === action.cardId) {
+                return {
+                  tasks: [
+                    ...tasks,
+                    {
+                      id: "task-" + randomId(),
+                      type: "task",
+                      title: action.title,
+                      description: "task description",
+                      completed: false,
+                    },
+                  ],
+                };
+              }
+              return card;
+            });
+          console.log(group);
+          return group;
+        });
+      // case "ADD_TASK":
       //   return state.map((group) => {
-      //     if (group.id === action.payload.id)
+      //     if (group.id === action.id)
       //       return {
       //         ...group,
       //         cards: [
+      //           ...group.cards,
+
       //           {
-      //             id: "card-" + randomId(),
-      //             type: "card",
-      //             title: action.payload.title,
-      //             description: "description",
-      //             tags: [],
-      //             color: "",
-      //             tasks: [],
+      //             id: action.cardId,
+      //             tasks: [
+      //               {
+      //                 id: "task-" + randomId(),
+      //                 type: "task",
+      //                 title: action.title,
+      //                 description: "task description",
+      //                 completed: false,
+      //               },
+      //             ],
       //           },
       //         ],
       //       };
+      //     console.log(group);
       //     return group;
       //   });
-      case "ADD_TASK":
-        return [
-          ...state,
-          {
-            id: randomId(),
-            title: action.payload,
-            description: "",
-            group: "",
-            completed: false,
-            tags: [],
-          },
-        ];
+      // case "ADD_TASK":
+      //   return [
+      //     ...state,
+      //     {
+      //       id: randomId(),
+      //       title: action.payload,
+      //       description: "",
+      //       group: "",
+      //       completed: false,
+      //       tags: [],
+      //     },
+      //   ];
       case "TOGGLE_TASK":
         return state.map((task) => {
           if (task.id === action.payload)

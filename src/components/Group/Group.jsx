@@ -1,15 +1,15 @@
 import { Input } from "@mantine/core";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addNewTitle } from "../../functions";
+import { addNewTitle, randomId } from "../../functions";
 import { Card } from "../";
 import "./Group.scss";
 
 const Group = (props) => {
-  const id = props.id;
+  const id = props.group.id;
   const [title, setTitle] = useState("");
-  const cards = props.board.cards;
-
+  const cards = props.group.cards;
+  const cardId = "card-" + randomId();
   const dispatch = useDispatch();
   const addNewCard = (e) => {
     e.preventDefault();
@@ -18,13 +18,14 @@ const Group = (props) => {
         type: "ADD_CARD",
         title: title,
         id: id,
+        cardId: cardId,
       });
     }
     setTitle("");
   };
   return (
     <div className="Group">
-      <h3>{props.title}</h3>
+      <h3>{props.group.title}</h3>
       <form action="">
         <Input
           type="text"
@@ -54,7 +55,7 @@ const Group = (props) => {
         }}
       >
         {cards.map((card) => (
-          <Card key={card.id} card={card} />
+          <Card key={card.id} card={card} groupId={id} cardId={cardId} />
         ))}
       </div>
     </div>
