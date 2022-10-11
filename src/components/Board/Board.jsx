@@ -5,15 +5,15 @@ import { addNewTitle } from "../../functions";
 import { Group } from "../index";
 
 const Board = () => {
-  let boards = useSelector((store) => store);
+  let board = useSelector((store) => store);
   const dispatch = useDispatch();
 
   const [title, setTitle] = useState("");
 
-  console.log(boards);
-  if (boards.length > 0) {
-    for (let i = 0; i < boards.length; i++) {
-      console.log(boards[i].title);
+  console.log(board);
+  if (board.length > 0) {
+    for (let i = 0; i < board.length; i++) {
+      console.log(board[i].title);
     }
   }
 
@@ -22,7 +22,7 @@ const Board = () => {
     if (title) {
       dispatch({
         type: "ADD_GROUP",
-        payload: title,
+        title: title,
       });
     }
     setTitle("");
@@ -31,8 +31,8 @@ const Board = () => {
   return (
     <div className="Board Container">
       <Grid>
-        {boards.map((board) => (
-          <Group key={board.id} title={board.title} />
+        {board.map((group) => (
+          <Group key={group.id} group={group} />
         ))}
       </Grid>
       <form action="">
