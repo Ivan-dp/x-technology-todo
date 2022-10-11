@@ -44,9 +44,23 @@ function Main() {
                 },
               ],
             };
-          console.log(group);
+          console.log(group.cards.Object);
           console.log(state[0].cards[0].title);
           return group;
+        });
+      case "ADD_TASK":
+        return state.map((group) => {
+          if (group.id === action.id) {
+            return [...group.cards].map((card) => [
+              ...card.tasks.push({
+                id: "task-" + randomId(),
+                type: "task",
+                title: action.title,
+                description: "task description",
+                completed: false,
+              }),
+            ]);
+          }
         });
       // case "ADD_TASK":
       //   return state.map((group) => {
@@ -81,32 +95,29 @@ function Main() {
       //     }
       //   )
       ///////////////////////////////////////////////////////////////
-      case "ADD_TASK":
-        return [
-          ...state.map((group) => {
-            if (group.id === action.id) {
-              return [
-                ...group.cards.map((card) => {
-                  if (card.id === action.cardId) {
-                    return [
-                      ...card.tasks,
-                      {
-                        id: "task-" + randomId(),
-                        type: "task",
-                        title: action.title,
-                        description: "task description",
-                        completed: false,
-                      },
-                    ];
-                  }
-                  return card;
-                }),
-              ];
-            }
-            console.log(group);
-            return group;
-          }),
-        ];
+      // case "ADD_TASK":
+      //   return [
+      //     ...state,
+      //     {
+      //       ...state.Object,
+      //       cards: [
+      //         ...state.Object.cards,
+      //         {
+      //           ...state.Object.cards.Object,
+      //           tasks: [
+      //             ...state.Object.cards.Object.tasks,
+      //             {
+      //               id: "task-" + randomId(),
+      //               type: "task",
+      //               title: action.title,
+      //               description: "task description",
+      //               completed: false,
+      //             },
+      //           ],
+      //         },
+      //       ],
+      //     },
+      //   ];
       //   ///////////////////////////////////////////////////////////////
       // case "ADD_TASK":
       //   return [
@@ -173,20 +184,20 @@ function Main() {
       //       tags: [],
       //     },
       //   ];
-      case "TOGGLE_TASK":
-        return state.map((task) => {
-          if (task.id === action.payload)
-            return { ...task, completed: !task.completed };
-          return task;
-        });
-      case "DELETE_TASK":
-        return state.filter((task) => action.payload !== task.id);
-      case "FILTER_TASK":
-        return state.filter((task) => task.completed === false);
-      case "ADD_DESCRIPTION":
-        return state.filter((task) => (task.description = action.payload));
-      case "ADD_TAGS":
-        return state.filter((task) => task.tags.push(action.payload));
+      // case "TOGGLE_TASK":
+      //   return state.map((task) => {
+      //     if (task.id === action.payload)
+      //       return { ...task, completed: !task.completed };
+      //     return task;
+      //   });
+      // case "DELETE_TASK":
+      //   return state.filter((task) => action.payload !== task.id);
+      // case "FILTER_TASK":
+      //   return state.filter((task) => task.completed === false);
+      // case "ADD_DESCRIPTION":
+      //   return state.filter((task) => (task.description = action.payload));
+      // case "ADD_TAGS":
+      //   return state.filter((task) => task.tags.push(action.payload));
       // return state.map((task) => {
       //   if (task.id === action.payload.id)
       //     return { ...task, group: action.payload.group };
@@ -196,6 +207,9 @@ function Main() {
         return state;
     }
   };
+  // console.log(state.Object);
+  // console.log(state.Object.cards.Object);
+  // console.log(state.Object.cards.Object.tasks);
 
   const store = createStore(reducer, composeWithDevTools());
 
